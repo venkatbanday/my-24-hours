@@ -131,7 +131,7 @@ const SHORT={work:"Work",commute:"Commute",sleep:"Sleep",meals:"Meals",family:"F
 const COMP=["Sleep","Family time","Exercise","Healthy meals","Calling parents","Hobbies","Rest and quiet","Nowhere, I am balanced!"];
 let S={h:{},comp:[],self:0,t:{},preset:""};
 try{const d=JSON.parse(localStorage.getItem("wl24")||"null");if(d&&d.h)S=Object.assign(S,d)}catch(e){}
-const save=()=>{try{localStorage.setItem("wl24",JSON.stringify(S))}catch(e){}};
+const save=()=>{try{localStorage.setItem("wl24",JSON.stringify(S))}catch(e){};};
 const $=id=>document.getElementById(id), num=v=>{v=parseFloat(v);return isFinite(v)&&v>0?Math.min(24,Math.round(v*4)/4):0};
 const hrs=k=>num(S.h[k]);
 const total=()=>ACTS.reduce((a,x)=>a+hrs(x[0]),0);
