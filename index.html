@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>My 24 Hours: Work-Life Balance Sheet</title>
+<meta name="description" content="A free tool to see how you spend your 24 hours, get a work-life balance score, personal guidance and a 5-day challenge.">
+<meta property="og:title" content="My 24 Hours: Work-Life Balance Sheet"><meta property="og:description" content="Fill in your day, get a score, guidance and a 5-day challenge. Free.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%E2%8F%B3%3C/text%3E%3C/svg%3E">
+<style>
+:root{--bg:#EEF3F6;--surface:#fff;--text:#14232B;--muted:#5F6F77;--blue:#004165;--mid:#006094;--mar:#772432;--yel:#F2DF74;--line:#D5DEE3;--good:#2F7D4F;--fair:#B07A00;--bad:#772432;--hdr:#004165;--hdrtxt:#fff;--chip:#E3ECF1;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0D1920;--surface:#15262F;--text:#E8EEF1;--muted:#9FB0B8;--blue:#7DBBE0;--mid:#5AA9D6;--mar:#E08A9A;--line:#27404C;--good:#6FCF97;--fair:#F2C14E;--bad:#E08A9A;--hdr:#062B42;--chip:#1E3541;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0D1920;--surface:#15262F;--text:#E8EEF1;--muted:#9FB0B8;--blue:#7DBBE0;--mid:#5AA9D6;--mar:#E08A9A;--line:#27404C;--good:#6FCF97;--fair:#F2C14E;--bad:#E08A9A;--hdr:#062B42;--chip:#1E3541;color-scheme:dark}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 Calibri,Carlito,"Segoe UI",system-ui,sans-serif}
+header{background:var(--hdr);color:var(--hdrtxt);padding:22px 20px 26px}
+.wrap{max-width:1040px;margin:0 auto}
+.eyebrow{font-size:12px;letter-spacing:.08em;font-weight:700;color:var(--yel)}
+h1{font:700 clamp(28px,5vw,40px)/1.15 Cambria,Caladea,Georgia,serif;margin:6px 0 4px}
+header p{margin:0;opacity:.85}
+main{max-width:1040px;margin:0 auto;padding:18px 16px 60px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:16px}
+h2{font:700 21px/1.2 Cambria,Caladea,Georgia,serif;color:var(--blue);margin:0 0 4px}
+.sub{color:var(--muted);margin:0 0 12px;font-size:15px}
+.grid{display:grid;grid-template-columns:1.15fr .85fr;gap:16px}
+@media(max-width:820px){.grid{grid-template-columns:1fr}}
+.row2{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+@media(max-width:600px){.row2{grid-template-columns:1fr}}
+label.f{display:block;font-size:13px;font-weight:700;color:var(--blue);margin-bottom:3px}
+input[type=text],textarea{width:100%;border:1px solid var(--line);background:var(--bg);color:var(--text);border-radius:8px;padding:9px 10px;font:inherit}
+textarea{min-height:60px;resize:vertical}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 2px}
+.chip{border:1px solid var(--mid);background:var(--chip);color:var(--text);padding:6px 12px;border-radius:999px;font:inherit;font-size:14px;cursor:pointer}
+.chip[aria-pressed=true]{background:var(--mid);color:#fff}
+.act{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--line)}
+.dot{width:12px;height:12px;border-radius:50%;flex:none}
+.act span.n{flex:1}
+.stp{display:flex;align-items:center;gap:4px}
+.stp button{width:32px;height:32px;border-radius:8px;border:1px solid var(--line);background:var(--chip);color:var(--text);font-size:18px;cursor:pointer}
+.stp input{width:64px;text-align:center;border:1px solid var(--mid);border-radius:8px;padding:6px;background:var(--bg);color:var(--text);font:700 16px Calibri,Carlito,system-ui,sans-serif}
+.tot{display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding:12px 14px;border-radius:10px;font-weight:700}
+.tot.ok{background:var(--good);color:#fff}.tot.warn{background:var(--yel);color:#14232B}.tot.over{background:var(--mar);color:#fff}
+:root[data-theme="dark"] .tot.ok{color:#0D1920}
+.ringbox{text-align:center;position:sticky;top:12px}
+.ringbox svg{width:100%;max-width:300px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 12px;justify-content:center;font-size:13px;color:var(--muted);margin-top:8px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}
+.checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px}
+.checks label{display:flex;gap:8px;align-items:center;padding:8px 10px;border:1px solid var(--line);border-radius:8px;cursor:pointer}
+.checks input{width:18px;height:18px;accent-color:var(--mid)}
+.scale{display:flex;gap:6px;flex-wrap:wrap}
+.scale button{width:40px;height:40px;border-radius:50%;border:2px solid var(--mid);background:transparent;color:var(--text);font:700 15px inherit;cursor:pointer}
+.scale button[aria-pressed=true]{background:var(--mid);color:#fff}
+#locked{text-align:center;color:var(--muted);padding:26px 10px}
+.big{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:10px}
+.score{font:700 58px/1 Cambria,Caladea,Georgia,serif}
+.score small{font-size:22px;color:var(--muted)}
+.badge{display:inline-block;padding:5px 14px;border-radius:999px;color:#fff;font-weight:700}
+.bar{height:12px;background:var(--chip);border-radius:6px;overflow:hidden;margin-top:4px}
+.bar>div{height:100%;border-radius:6px}
+.area{padding:12px 0;border-bottom:1px solid var(--line)}
+.area .h{display:flex;justify-content:space-between;gap:8px;font-weight:700}
+.area p{margin:4px 0 0;color:var(--muted);font-size:15px}
+.note{border-left:4px solid var(--mar);background:var(--chip);padding:10px 12px;border-radius:0 8px 8px 0;margin-top:10px}
+ol.pri{padding-left:20px;margin:6px 0}ol.pri li{margin-bottom:6px}
+.band{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;font-size:12px;text-align:center;margin-top:10px}
+.band div{padding:6px 2px;border-radius:6px;color:#fff;font-weight:700}
+button.link{background:none;border:0;color:var(--mid);text-decoration:underline;cursor:pointer;font:inherit;padding:0}
+@media print{header{background:none;color:#000}.stp button,.chips,#reset,.noprint,.steps{display:none}.ringbox{position:static}}
+header{background:linear-gradient(135deg,var(--hdr) 0%,#006094 100%);position:relative;overflow:hidden}
+header:before{content:"";position:absolute;right:-60px;top:-90px;width:300px;height:300px;border-radius:50%;background:#772432;opacity:.9}
+header:after{content:"";position:absolute;right:120px;bottom:-110px;width:200px;height:200px;border-radius:50%;background:var(--yel);opacity:.25}
+header .wrap{position:relative;z-index:1}
+.tag{display:inline-block;margin-top:10px;background:var(--yel);color:#14232B;font-weight:700;font-size:13px;padding:4px 12px;border-radius:999px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+.steps div{background:rgba(255,255,255,.12);border-radius:12px;padding:10px 12px;font-size:14px}
+.steps b{display:block;color:var(--yel);font-size:13px;letter-spacing:.04em}
+@media(max-width:600px){.steps{grid-template-columns:1fr}}
+.cmp{display:grid;grid-template-columns:150px 1fr 52px;gap:10px;align-items:center;margin:7px 0;font-size:14px}
+.cb{position:relative;height:14px;background:var(--chip);border-radius:7px}
+.cb i{position:absolute;left:0;top:0;height:100%;border-radius:7px;background:var(--mid)}
+.cb u{position:absolute;top:-4px;width:3px;height:22px;background:var(--mar);border-radius:2px}
+@media(max-width:600px){.cmp{grid-template-columns:100px 1fr 44px;font-size:13px}}
+.days{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-top:8px}
+.days div{background:var(--chip);border-radius:10px;padding:10px;font-size:14px;border-top:4px solid var(--mid)}
+.days b{display:block;color:var(--mar);margin-bottom:2px}
+.btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.facts div{background:var(--chip);border-radius:12px;padding:14px;border-top:4px solid var(--mar)}
+.facts b{display:block;color:var(--blue);margin-bottom:4px}
+.about{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}
+.avatar{width:64px;height:64px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font:700 24px Cambria,Georgia,serif;flex:none}
+.about>div:last-child{flex:1;min-width:240px}
+.cta{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.cta a{background:var(--mid);color:#fff;text-decoration:none;font-weight:700;padding:9px 14px;border-radius:999px;font-size:14px}
+.cta a.wa{background:#1E8E4E}
+footer{text-align:center;color:var(--muted);font-size:13px;padding:0 16px 40px}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<div class="eyebrow">TOASTMASTERS INTERNATIONAL · PATHWAYS · LEVEL 4</div>
+<h1>My 24 Hours</h1>
+<p>Work-life balance sheet · Leading Without Losing Life</p>
+<span class="tag">Free · private · takes 2 minutes</span>
+<div class="steps"><div><b>STEP 1</b>Enter how you spend a typical day</div><div><b>STEP 2</b>Get your score and personal guidance</div><div><b>STEP 3</b>Start a 5-day mini challenge</div></div>
+</div></header>
+<main>
+<section class="card">
+<div class="row2">
+<div><label class="f" for="name">Name (optional)</label><input type="text" id="name" data-t="name"></div>
+<div><label class="f" for="club">Club</label><input type="text" id="club" data-t="club"></div>
+<div><label class="f" for="date">Date</label><input type="text" id="date" data-t="date" placeholder="e.g. 25 Oct 2026"></div>
+</div>
+<label class="f" style="margin-top:12px">My typical day (pick one to start from an example, or type your own hours)</label>
+<div class="chips" id="presets"></div>
+<p class="sub" style="margin-top:8px">Your entries stay private on this device. Nothing is sent anywhere.</p>
+</section>
+
+<div class="grid">
+<section class="card">
+<h2>Where do my 24 hours go?</h2>
+<p class="sub">Enter hours for a typical day (quarter hours are fine). Not working? Fill in your real day.</p>
+<div id="acts"></div>
+<div id="tot" class="tot warn"></div>
+</section>
+<aside class="card ringbox">
+<h2>My day at a glance</h2>
+<svg viewBox="0 0 200 200" role="img" aria-label="Donut chart of how my 24 hours are spent" id="ring"></svg>
+<div class="legend" id="legend"></div>
+</aside>
+</div>
+
+<section class="card">
+<h2>When time is short, where do I compensate?</h2>
+<p class="sub">Tick all that apply.</p>
+<div class="checks" id="comp"></div>
+<h2 style="margin-top:18px">My balance score today</h2>
+<p class="sub">1 = very unbalanced, 10 = well balanced</p>
+<div class="scale" id="self"></div>
+</section>
+
+<section class="card" id="scorecard" aria-live="polite">
+<h2>My scorecard and guidance</h2>
+<div id="locked"></div>
+<div id="result" hidden></div>
+</section>
+
+<section class="card">
+<h2>My reflection</h2>
+<label class="f" for="r1" style="margin-top:8px">The activity that shrank first when work grew</label><textarea id="r1" data-t="r1"></textarea>
+<label class="f" for="r2" style="margin-top:10px">One thing I will change this week</label><textarea id="r2" data-t="r2"></textarea>
+<label class="f" for="r3" style="margin-top:10px">The person I will call or spend time with this week</label><textarea id="r3" data-t="r3"></textarea>
+<p class="sub" style="margin-top:14px">Most adults need at least 7 hours of sleep. This scorecard is a simple guide based on commonly recommended levels, not a medical assessment. If you are worried about your health, please see a doctor. <button class="link" id="reset">Clear everything</button></p>
+</section>
+<section class="card"><h2>Good to know</h2><p class="sub">Simple facts behind the scorecard.</p>
+<div class="facts"><div><b>Sleep comes first</b>Most adults need at least 7 hours a night. It is the first thing to protect when life gets busy.</div>
+<div><b>Burnout is real</b>The World Health Organization describes burnout as an occupational phenomenon linked to chronic workplace stress, not a medical diagnosis.</div>
+<div><b>Small beats big</b>Ten minutes of walking or phone-free talk, done daily, beats a big plan that never happens.</div>
+<div><b>People matter</b>Regular, short contact with family and friends protects your wellbeing more than rare, long catch-ups.</div></div></section>
+<section class="card" id="about"><h2>About the builder</h2><div class="about"><div class="avatar" aria-hidden="true">VB</div><div>
+<p style="margin:0 0 6px"><b>Venkateswararao Banday:</b> multi-sector programme and operations leader with the right to work in the UK and India, looking for roles in London.</p>
+<p style="margin:0 0 6px">I build apps with AI and share them free to spread knowledge and useful information. If this helped you, and you know of any opportunity or can refer me, I would be very grateful.</p>
+<div class="cta"><a class="wa" href="https://wa.me/919962507575" target="_blank" rel="noopener">WhatsApp +91 9962507575</a><a class="wa" href="https://wa.me/447391522993" target="_blank" rel="noopener">WhatsApp +44 7391 522993</a><a href="https://www.linkedin.com/in/venkateswararao-banday" target="_blank" rel="noopener">LinkedIn: linkedin.com/in/venkateswararao-banday</a></div></div></div></section>
+</main>
+<footer>Made with AI by Venkateswararao Banday · Free to use and share · Your entries stay on your device</footer>
+
+<script>
+const ACTS=[["work","Work or study","#004165"],["commute","Commuting and getting ready","#6E9BB8"],["sleep","Sleep","#006094"],["meals","Meals","#B8962E"],["family","Family and friends","#B04A5A"],["health","Exercise and health","#3F7F8C"],["tm","Toastmasters / volunteering","#772432"],["hobby","Hobbies and learning","#7A5C99"],["rest","Rest, TV and phone","#8E9BA1"],["other","Other","#C9A227"]];
+const PRESETS={"Working day":{work:8,commute:4,sleep:8,meals:2,family:1,health:1,rest:0},"Not working":{sleep:9,commute:1,meals:2,family:4,health:2,hobby:2,rest:4},"Leader with extra roles":{work:9,tm:2,commute:4,sleep:6,meals:2,family:1}};
+const SHORT={work:"Work",commute:"Commute",sleep:"Sleep",meals:"Meals",family:"Family",health:"Health",tm:"Club roles",hobby:"Hobbies",rest:"Rest",other:"Other"};
+const COMP=["Sleep","Family time","Exercise","Healthy meals","Calling parents","Hobbies","Rest and quiet","Nowhere, I am balanced!"];
+let S={h:{},comp:[],self:0,t:{},preset:""};
+try{const d=JSON.parse(localStorage.getItem("wl24")||"null");if(d&&d.h)S=Object.assign(S,d)}catch(e){}
+const save=()=>{try{localStorage.setItem("wl24",JSON.stringify(S))}catch(e){}};
+const $=id=>document.getElementById(id), num=v=>{v=parseFloat(v);return isFinite(v)&&v>0?Math.min(24,Math.round(v*4)/4):0};
+const hrs=k=>num(S.h[k]);
+const total=()=>ACTS.reduce((a,x)=>a+hrs(x[0]),0);
+
+function build(){
+  $("acts").innerHTML=ACTS.map(([k,l,c])=>`<div class="act"><i class="dot" style="background:${c}"></i><span class="n">${l}</span><div class="stp"><button type="button" data-k="${k}" data-d="-0.5" aria-label="Less ${l}">−</button><input inputmode="decimal" id="in_${k}" data-k="${k}" aria-label="Hours for ${l}"><button type="button" data-k="${k}" data-d="0.5" aria-label="More ${l}">+</button></div></div>`).join("");
+  $("presets").innerHTML=Object.keys(PRESETS).map(p=>`<button type="button" class="chip" data-p="${p}">${p}</button>`).join("")+`<button type="button" class="chip" data-p="">Start blank</button>`;
+  $("comp").innerHTML=COMP.map((c,i)=>`<label><input type="checkbox" data-c="${c}"> ${c}</label>`).join("");
+  $("self").innerHTML=[1,2,3,4,5,6,7,8,9,10].map(n=>`<button type="button" data-s="${n}">${n}</button>`).join("");
+  $("legend").innerHTML=ACTS.map(([k,l,c])=>`<span><i style="background:${c}"></i>${SHORT[k]}</span>`).join("");
+}
+function syncInputs(){
+  ACTS.forEach(([k])=>{const el=$("in_"+k);if(document.activeElement!==el)el.value=hrs(k)||""});
+  document.querySelectorAll("[data-t]").forEach(el=>{if(document.activeElement!==el)el.value=S.t[el.dataset.t]||""});
+  document.querySelectorAll("[data-c]").forEach(el=>el.checked=S.comp.includes(el.dataset.c));
+  document.querySelectorAll("[data-s]").forEach(el=>el.setAttribute("aria-pressed",String(+el.dataset.s===S.self)));
+  document.querySelectorAll("[data-p]").forEach(el=>el.setAttribute("aria-pressed",String(el.dataset.p===S.preset&&S.preset!=="")));
+}
+function ring(){
+  const r=70,C=2*Math.PI*r,T=total();let off=0,out=`<circle cx="100" cy="100" r="${r}" fill="none" stroke="var(--chip)" stroke-width="26"/>`;
+  ACTS.forEach(([k,l,c])=>{const h=hrs(k);if(!h)return;const len=Math.min(h,24)/24*C;out+=`<circle cx="100" cy="100" r="${r}" fill="none" stroke="${c}" stroke-width="26" stroke-dasharray="${len} ${C-len}" stroke-dashoffset="${-off}" transform="rotate(-90 100 100)"/>`;off+=len});
+  out+=`<text x="100" y="104" text-anchor="middle" font-size="34" font-weight="700" font-family="Cambria,Georgia,serif" fill="var(--blue)">${+T.toFixed(2)}</text><text x="100" y="124" text-anchor="middle" font-size="12" fill="var(--muted)">of 24 hours</text>`;
+  $("ring").innerHTML=out;
+}
+function totBox(){
+  const T=total(),el=$("tot"),d=Math.round((24-T)*100)/100;
+  if(Math.abs(d)<0.001){el.className="tot ok";el.innerHTML="<span>TOTAL</span><span>24 / 24 ✓ Perfect</span>"}
+  else if(d>0){el.className="tot warn";el.innerHTML=`<span>TOTAL ${T} / 24</span><span>${d} h left to place</span>`}
+  else{el.className="tot over";el.innerHTML=`<span>TOTAL ${T} / 24</span><span>${-d} h too many</span>`}
+}
+// ---------- scoring ----------
+function grade(v,steps){for(const [min,pts] of steps)if(v>=min)return pts;return 0}
+function score(){
+  const sl=hrs("sleep"),fa=hrs("family"),he=hrs("health"),me=hrs("hobby")+hrs("rest"),ml=hrs("meals"),ob=hrs("work")+hrs("commute")+hrs("tm");
+  const A=[];
+  let p=(sl>=7&&sl<=9)?25:(sl>=6&&sl<7)||(sl>9&&sl<=10)?15:sl>=5?8:3;
+  A.push({k:"sleep",n:"Sleep",p,m:25,v:sl+" h",goal:"Aim: 7–9 hours",
+    good:"Well done. 7–9 hours supports focus, mood and long-term health.",
+    low:sl>9?"Regularly sleeping over 9 hours can mean you are run down. If you are still tired, check in with a doctor.":"You are short on sleep. Sleep is the first thing to protect when you take on more.",
+    act:"Move bedtime 15 minutes earlier each week and keep screens out of the last 30 minutes."});
+  p=grade(fa,[[2,20],[1,14],[.5,8]])||2;
+  A.push({k:"family",n:"Family and friends",p,m:20,v:fa+" h",goal:"Aim: 2+ hours",good:"Strong. Time with the people you love is your best protection against stress.",low:"Relationships are paying the price. Even small, regular contact counts.",act:"Protect one phone-free meal or bedtime every day, and put a weekly call to your parents in the calendar."});
+  p=grade(he,[[.5,15],[.25,8]]);
+  A.push({k:"health",n:"Exercise and health",p,m:15,v:he+" h",goal:"Aim: 30+ minutes",good:"Great. Regular movement lifts energy, mood and sleep.",low:"Your body needs more movement. Start small.",act:"Take a 10–15 minute walk today and build up to 30 minutes."});
+  p=grade(me,[[1,15],[.5,9]])||3;
+  A.push({k:"me",n:"Rest and hobbies (“you” time)",p,m:15,v:me+" h",goal:"Aim: 1+ hour",good:"Good. Time for yourself keeps you creative and resilient.",low:"There is little time that is just yours.",act:"Block 30 minutes this week for something you enjoy, with no phone."});
+  p=ob<=9?15:ob<=10.5?11:ob<=12?7:ob<=14?3:0;
+  A.push({k:"load",n:"Workload (work + commute + roles)",p,m:15,v:ob+" h",goal:"Aim: 9 hours or less",good:"Your commitments leave room for a life. Keep it that way.",low:ob>12?"Your commitments take most of your waking day. This is the burnout trap.":"Your commitments are heavy. Watch for creeping overload.",act:"Pick one commitment to delegate, shorten or answer with a kind “not now”."});
+  p=ml>=1?10:ml>=.5?6:2;
+  A.push({k:"meals",n:"Meals",p,m:10,v:ml+" h",goal:"Aim: 1+ hour",good:"Good. Proper meals support energy and mood.",low:"You may be rushing or skipping meals.",act:"Take at least one meal away from your screen and phone."});
+  return A;
+}
+const BANDS=[[85,"Thriving","var(--good)","Your day has room for rest, relationships and work. Keep protecting it."],[70,"Healthy, with room to tune","var(--mid)","Mostly well balanced. One or two small changes will make a real difference."],[50,"Stretched","var(--fair)","You are managing, but something is giving way. Act now, before it becomes a habit."],[30,"Out of balance","var(--bad)","Several areas need attention. Choose one change this week and ask for support."],[0,"Warning zone","var(--bad)","Your day leaves very little for you. Please talk to someone you trust, and see a health professional if you feel unwell."]];
+const CH={sleep:["Set a fixed wake-up time","Screens off 30 minutes before bed","Bed 15 minutes earlier","No caffeine after 2 pm","Write tomorrow’s to-do list before bed"],family:["Have one phone-free dinner","Call a parent or relative","Ask each family member one real question","Plan a weekend outing","Say thank you to someone at home"],health:["Walk for 10 minutes","Take the stairs and stretch","Walk during a phone call","Dance or exercise for 15 minutes","Plan 3 active slots for next week"],me:["Do something you enjoy for 30 minutes","Have a quiet, phone-free cup of tea","Read 10 pages","Try a new hobby for 20 minutes","Declare one evening a “you” evening"],load:["List all your commitments","Mark one to delegate","Say one kind “not now”","Block one no-meeting hour","Review the list with your leader or a friend"],meals:["Eat one meal away from screens","Plan tomorrow’s lunch","Drink water with each meal","Eat slowly for 20 minutes","Share a meal with someone"]};
+let LAST="";
+const gauge=(v,c)=>{const r=52,C=2*Math.PI*r;return `<svg viewBox="0 0 130 130" width="150" height="150" role="img" aria-label="Score ${v} out of 100"><circle cx="65" cy="65" r="${r}" fill="none" stroke="var(--chip)" stroke-width="13"/><circle cx="65" cy="65" r="${r}" fill="none" stroke="${c}" stroke-width="13" stroke-linecap="round" stroke-dasharray="${C*v/100} ${C}" transform="rotate(-90 65 65)"/><text x="65" y="64" text-anchor="middle" font-size="36" font-weight="700" font-family="Cambria,Georgia,serif" fill="var(--blue)">${v}</text><text x="65" y="84" text-anchor="middle" font-size="12" fill="var(--muted)">out of 100</text></svg>`};
+function copyRes(){const b=document.getElementById("copy");const ok=()=>{b.textContent="Copied ✓"};try{navigator.clipboard.writeText(LAST).then(ok,()=>prompt("Copy your result:",LAST))}catch(e){prompt("Copy your result:",LAST)}}
+function result(){
+  const T=total(),ok=Math.abs(T-24)<0.001,lock=$("locked"),res=$("result");
+  if(!ok){res.hidden=true;lock.hidden=false;lock.innerHTML=T===0?"Fill in your 24 hours above and your scorecard will appear here.":`Your hours add up to ${+T.toFixed(2)}. Make them total exactly 24 to see your scorecard.`;return}
+  lock.hidden=true;res.hidden=false;
+  const A=score(),tot=A.reduce((a,x)=>a+x.p,0),B=BANDS.find(b=>tot>=b[0]);
+  let h=`<div class="big">${gauge(tot,B[2])}<div><span class="badge" style="background:${B[2]}">${B[1]}</span><p style="margin:6px 0 0">${B[3]}</p></div></div>
+  <div class="band">${[["0–29","Warning zone","#772432"],["30–49","Out of balance","#9B3B4B"],["50–69","Stretched","#B07A00"],["70–84","Healthy","#006094"],["85–100","Thriving","#2F7D4F"]].map(b=>`<div style="background:${b[2]}">${b[0]}<br>${b[1]}</div>`).join("")}</div><h2 style="margin-top:18px">Score by area</h2>`;
+  A.forEach(a=>{const r=a.p/a.m,c=r>=.85?"var(--good)":r>=.5?"var(--fair)":"var(--bad)",s=r>=.85?"On track":r>=.5?"Fair":"Needs attention";
+    h+=`<div class="area"><div class="h"><span>${a.n} · ${a.v}</span><span style="color:${c}">${a.p}/${a.m} · ${s}</span></div><div class="bar"><div style="width:${r*100}%;background:${c}"></div></div><p><b>${a.goal}.</b> ${r>=.85?a.good:a.low}</p></div>`});
+  const pri=A.filter(a=>a.p/a.m<.85).sort((x,y)=>x.p/x.m-y.p/y.m).slice(0,3);
+  h+=`<h2 style="margin-top:18px">My top priorities this week</h2>`+(pri.length?`<ol class="pri">${pri.map(a=>`<li><b>${a.n}:</b> ${a.act}</li>`).join("")}</ol>`:`<p>Nothing urgent. Keep your good habits and help a fellow member find their balance.</p>`);
+  const notes=[],tm=hrs("tm");
+  if(tm>=2&&(hrs("sleep")<7||hrs("family")<1))notes.push("<b>Leader check:</b> your club and volunteering time is high while sleep or family time is low. Use the Golden Boundary Test before your next yes: will it cost me sleep or family time, and who else could share it?");
+  if(S.self&&S.self>=8&&tot<60)notes.push(`<b>Perception check:</b> you rated your balance ${S.self}/10, but the hours suggest more strain. It is easy to get used to being stretched.`);
+  if(S.self&&S.self<=4&&tot>=70)notes.push(`<b>Perception check:</b> you rated your balance ${S.self}/10 even though the hours look healthy. Your concern may be about quality, not quantity: how present are you in those hours?`);
+  const cm=S.comp.filter(c=>c!=="Nowhere, I am balanced!");
+  if(cm.length)notes.push(`<b>Where you compensate:</b> ${cm.join(", ").toLowerCase()}. Those are the first things to protect when work grows.`);
+  if(hrs("work")===0&&hrs("tm")===0)notes.push("<b>Not working?</b> You have more free hours. Protect your routine, keep a purpose for the day, and stay connected with others.");
+  h+=notes.map(n=>`<div class="note">${n}</div>`).join("");
+  const CMP=[["Sleep",hrs("sleep"),8],["Family and friends",hrs("family"),2],["Exercise and health",hrs("health"),.5],["You time",hrs("hobby")+hrs("rest"),1],["Meals",hrs("meals"),1],["Workload (aim: 9 h or less)",hrs("work")+hrs("commute")+hrs("tm"),9]];
+  h+=`<h2 style="margin-top:18px">My day vs a healthy day</h2><p class="sub">Bar = your hours · red line = a healthy aim</p>`+CMP.map(([n,v,g])=>{const m=Math.max(g*1.5,v)||1;return `<div class="cmp"><span>${n}</span><div class="cb"><i style="width:${v/m*100}%"></i><u style="left:${g/m*100}%"></u></div><b>${v} h</b></div>`}).join("");
+  const tp=pri[0],ch=CH[tp?tp.k:"me"];
+  h+=`<h2 style="margin-top:18px">My 5-day mini challenge${tp?": "+tp.n:" (keep it going)"}</h2><div class="days">${ch.map((d,i)=>`<div><b>Day ${i+1}</b>${d}</div>`).join("")}</div><div class="btns noprint"><button class="chip" id="copy" type="button">Copy my result</button><button class="chip" id="print" type="button">Print or save as PDF</button></div>`;
+  LAST=`My 24 Hours score: ${tot}/100 (${B[1]}). Top priority: ${tp?tp.n:"keep up the good habits"}. Try the free sheet: ${location.href.split("#")[0]}`;
+  res.innerHTML=h;
+}
+function render(){syncInputs();ring();totBox();result()}
+// ---------- events ----------
+build();render();
+document.addEventListener("click",e=>{
+  const b=e.target.closest("button");if(!b)return;if(b.id==="print"){window.print();return}if(b.id==="copy"){copyRes();return}
+  if(b.dataset.d){const k=b.dataset.k;S.h[k]=Math.max(0,hrs(k)+ +b.dataset.d);S.preset=""}
+  else if(b.dataset.p!==undefined){S.h=Object.assign({},PRESETS[b.dataset.p]||{});S.preset=b.dataset.p}
+  else if(b.dataset.s){S.self=+b.dataset.s}
+  else if(b.id==="reset"){if(confirm("Clear all your entries?"))S={h:{},comp:[],self:0,t:{},preset:""}}
+  else return;
+  save();render();
+});
+document.addEventListener("input",e=>{
+  const el=e.target;
+  if(el.dataset.k&&el.tagName==="INPUT"){S.h[el.dataset.k]=parseFloat(el.value)||0;S.preset=""}
+  else if(el.dataset.t){S.t[el.dataset.t]=el.value}
+  else if(el.dataset.c){const c=el.dataset.c;S.comp=el.checked?[...new Set([...S.comp,c])]:S.comp.filter(x=>x!==c)}
+  else return;
+  save();ring();totBox();result();
+});
+document.addEventListener("change",e=>{if(e.target.dataset.k){syncInputs()}});
+</script>
+</body>
+</html>
